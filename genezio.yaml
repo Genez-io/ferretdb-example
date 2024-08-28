@@ -1,0 +1,16 @@
+name: ferret-example
+region: eu-central-1
+yamlVersion: 2
+services:
+  databases:
+    - name: ferret
+      region: eu-central-1
+backend:
+  path: .
+  language:
+    name: js
+  functions:
+    - name: ferret
+      path: .
+      entry: ferret.mjs
+      handler: handler

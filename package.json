@@ -1,0 +1,18 @@
+{
+  "name": "ferret-example",
+  "version": "1.0.0",
+  "main": "ferret.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "mongoose": "^8.5.4"
+  },
+  "prettier": {
+    "tabWidth": 4
+  }
+}
