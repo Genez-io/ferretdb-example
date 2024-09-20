@@ -4,7 +4,7 @@ yamlVersion: 2
 services:
   databases:
     - name: ferret
-      region: eu-central-1
+      type: postgres-neon
 backend:
   path: .
   language:
