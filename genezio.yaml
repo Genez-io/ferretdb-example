@@ -2,15 +2,17 @@ name: ferret-example
 region: eu-central-1
 yamlVersion: 2
 services:
-  databases:
-    - name: ferret
-      type: postgres-neon
+    databases:
+        - name: my-postgres
+          type: postgres-neon
 backend:
-  path: .
-  language:
-    name: js
-  functions:
-    - name: ferret
-      path: .
-      entry: ferret.mjs
-      handler: handler
+    path: .
+    language:
+        name: js
+    functions:
+        - name: ferret
+          path: .
+          entry: ferret.mjs
+          handler: handler
+    scripts:
+        deploy: npm install

@@ -12,7 +12,7 @@ import path from "path";
  */
 function postgresUrlToMongoUrl(postgresUrl) {
     const [, user, password, , , database] = postgresUrl.match(
-        /^postgresql:\/\/(.+):(.+)@(.+?)(:.+)?\/(.+?)(\?.*)?$/,
+        /^postgresql:\/\/(.+):(.+)@(.+?)(:.+)?\/(.+?)(\?.*)?$/
     );
 
     return `mongodb://${user}:${password}@127.0.0.1/${database}?authMechanism=PLAIN`;
@@ -29,7 +29,7 @@ function startFerretDB() {
     execAsync(path.resolve("./ferretdb"), {
         cwd: "/tmp",
         env: {
-            FERRETDB_POSTGRESQL_URL: process.env.FERRET_DATABASE_URL,
+            FERRETDB_POSTGRESQL_URL: process.env.MY_POSTGRES_DATABASE_URL,
             FERRETDB_TELEMETRY: "disable",
             FERRETDB_LISTEN_ADDR: "127.0.0.1:27017",
         },
@@ -38,11 +38,11 @@ function startFerretDB() {
     });
 }
 
-// Start the FerretDB proxy
+// Start the FerretDB proxy only once during the cold start of the function
 startFerretDB();
 
 // Connect to the MongoDB database
-mongoose.connect(postgresUrlToMongoUrl(process.env.FERRET_DATABASE_URL));
+mongoose.connect(postgresUrlToMongoUrl(process.env.MY_POSTGRES_DATABASE_URL));
 
 // Define a Person model
 let Person = mongoose.model("Person", { name: String, age: Number });
